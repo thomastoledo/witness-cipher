@@ -37,7 +37,7 @@
           <span class="badge">Text to base64</span>
         </div>
 
-        <form method="POST" action="/encrypt" class="panel-form">
+        <form method="POST" action="/encrypt" class="panel-form" data-encrypt-form>
           {{ csrfField() }}
 
           <label class="field">
@@ -58,6 +58,7 @@
               type="password"
               placeholder="Shared secret"
               autocomplete="off"
+              data-encrypt-secret
               value="{{ encryptForm.password }}"
             />
           </label>
@@ -168,15 +169,6 @@
         <p>
           Every encrypted message uses the `Salted__` envelope and can be decrypted with the matching OpenSSL command
           line.
-        </p>
-      </article>
-
-      <article class="note-card note-card-dotted">
-        <p class="panel-kicker">Hypermedia flow</p>
-        <h3>Server-rendered by AdonisJS</h3>
-        <p>
-          The interface is now rendered through Edge templates and AdonisJS routes, while keeping the stark geometric
-          ink aesthetic of the original utility.
         </p>
       </article>
     </section>
