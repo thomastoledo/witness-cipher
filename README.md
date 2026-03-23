@@ -118,3 +118,24 @@ test/opensslEnvelope.test.mjs
 - The decode flow understands `orbital-noise`-style JSON envelopes.
 - `meta` is displayed but not required for decryption.
 - The current app expects a Node version compatible with modern AdonisJS releases.
+
+## Heroku
+
+For Heroku, the important points are:
+
+- the app must be built during deploy
+- production must start from `build/bin/server.js`
+- you must define at least `APP_KEY`
+
+The repository now includes a `Procfile` and a Heroku-specific build step.
+
+Recommended Heroku config vars:
+
+```text
+APP_KEY=generate-a-real-secret
+NODE_ENV=production
+LOG_LEVEL=info
+SESSION_DRIVER=cookie
+```
+
+`HOST`, `PORT`, and `APP_URL` now have safe defaults, so they are no longer required just to boot the app.

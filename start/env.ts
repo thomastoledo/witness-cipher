@@ -11,6 +11,13 @@
 
 import { Env } from '@adonisjs/core/env'
 
+process.env.NODE_ENV ??= 'development'
+process.env.PORT ??= '3333'
+process.env.HOST ??= '0.0.0.0'
+process.env.LOG_LEVEL ??= 'info'
+process.env.SESSION_DRIVER ??= 'cookie'
+process.env.APP_URL ??= `http://${process.env.HOST}:${process.env.PORT}`
+
 export default await Env.create(new URL('../', import.meta.url), {
   // Node
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),

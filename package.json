@@ -5,11 +5,12 @@
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=24.0.0"
+    "node": "24.x"
   },
   "scripts": {
-    "start": "node bin/server.js",
+    "start": "node build/bin/server.js",
     "build": "node ace build",
+    "heroku-postbuild": "node ace build",
     "dev": "node ace serve --hmr",
     "test": "node --test test/opensslEnvelope.test.mjs",
     "test:adonis": "node ace test",
