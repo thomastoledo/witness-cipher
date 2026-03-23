@@ -1,0 +1,184 @@
+@layout()
+  <div class="app-shell">
+    <section class="hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">Witness Cipher // AdonisJS Utility</p>
+        <h1>Encrypt the testimonies. Decode the archive.</h1>
+        <p class="hero-text">
+          A server-rendered AdonisJS tool for producing or decoding OpenSSL-compatible base64 envelopes. Type a
+          message plus a password, or paste a payload back in to decrypt it.
+        </p>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="chip-grid">
+          <span class="chip">{{ settings.alg }}</span>
+          <span class="chip">{{ settings.kdf }}</span>
+          <span class="chip">{{ settings.iter }} iterations</span>
+          <span class="chip">{{ settings.digest }}</span>
+          <span class="chip">{{ settings.tool }}</span>
+          <span class="chip">AdonisJS</span>
+        </div>
+
+        <div class="command-card">
+          <p class="command-label">CLI twin</p>
+          <code>{{ opensslCommand }}</code>
+        </div>
+      </aside>
+    </section>
+
+    <section class="workspace-grid">
+      <article class="tool-panel tool-panel-plain">
+        <div class="panel-head">
+          <div>
+            <p class="panel-kicker">Encode Station</p>
+            <h2>Encrypt and encode</h2>
+          </div>
+          <span class="badge">Text to base64</span>
+        </div>
+
+        <form method="POST" action="/encrypt" class="panel-form">
+          {{ csrfField() }}
+
+          <label class="field">
+            <span>Message</span>
+            <textarea
+              name="message"
+              class="input-area"
+              spellcheck="false"
+              placeholder="Enter the testimony or note you want to encrypt."
+            >{{ encryptForm.message }}</textarea>
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input
+              name="password"
+              class="input-line"
+              type="password"
+              placeholder="Shared secret"
+              autocomplete="off"
+              value="{{ encryptForm.password }}"
+            />
+          </label>
+
+          <div class="button-row">
+            <button class="action action-plain" type="submit">Encrypt and encode</button>
+            <a class="action action-ghost" href="/">Reset</a>
+          </div>
+        </form>
+
+        <div class="status-banner {{ encryptStatus.tone }}">{{ encryptStatus.text }}</div>
+
+        <label class="field">
+          <span>Base64 output</span>
+          <textarea
+            id="encryptOutput"
+            class="output-area"
+            readonly
+            spellcheck="false"
+            placeholder="The OpenSSL-compatible base64 payload will appear here."
+          >{{ encryptResult }}</textarea>
+        </label>
+
+        <div class="button-row compact">
+          <button class="action action-dashed" type="button" data-copy-target="encryptOutput">Copy base64</button>
+        </div>
+      </article>
+
+      <article class="tool-panel tool-panel-dashed">
+        <div class="panel-head">
+          <div>
+            <p class="panel-kicker">Decode Station</p>
+            <h2>Decode and decrypt</h2>
+          </div>
+          <span class="badge badge-dashed">Base64 to text</span>
+        </div>
+
+        <form method="POST" action="/decrypt" class="panel-form">
+          {{ csrfField() }}
+
+          <label class="field">
+            <span>Payload</span>
+            <textarea
+              name="payload"
+              class="input-area"
+              spellcheck="false"
+              placeholder="Paste raw base64 or the full orbital-noise JSON envelope."
+            >{{ decodeForm.payload }}</textarea>
+          </label>
+
+          @if(meta)
+            <div class="meta-card">
+              <p class="command-label">Meta clue detected</p>
+              <pre>{{ meta }}</pre>
+            </div>
+          @end
+
+          <label class="field">
+            <span>Password</span>
+            <input
+              name="password"
+              class="input-line"
+              type="password"
+              placeholder="Shared secret"
+              autocomplete="off"
+              value="{{ decodeForm.password }}"
+            />
+          </label>
+
+          <div class="button-row">
+            <button class="action action-dotted" type="submit">Decode and decrypt</button>
+            <a class="action action-ghost" href="/">Clear</a>
+          </div>
+        </form>
+
+        <div class="status-banner {{ decodeStatus.tone }}">{{ decodeStatus.text }}</div>
+
+        <label class="field">
+          <span>Decoded text</span>
+          <textarea
+            id="decodeOutput"
+            class="output-area"
+            readonly
+            spellcheck="false"
+            placeholder="The decrypted text will appear here. JSON is formatted for readability."
+          >{{ decodeResult }}</textarea>
+        </label>
+
+        <div class="button-row compact">
+          <button class="action action-dashed" type="button" data-copy-target="decodeOutput">Copy text</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="notes-grid">
+      <article class="note-card note-card-plain">
+        <p class="panel-kicker">Envelope-aware input</p>
+        <h3>Paste the full JSON if you want</h3>
+        <p>
+          The decode station accepts raw base64 and full response objects. If the JSON carries a `meta` clue, the app
+          surfaces it automatically.
+        </p>
+      </article>
+
+      <article class="note-card note-card-dashed">
+        <p class="panel-kicker">OpenSSL format</p>
+        <h3>Salted payloads</h3>
+        <p>
+          Every encrypted message uses the `Salted__` envelope and can be decrypted with the matching OpenSSL command
+          line.
+        </p>
+      </article>
+
+      <article class="note-card note-card-dotted">
+        <p class="panel-kicker">Hypermedia flow</p>
+        <h3>Server-rendered by AdonisJS</h3>
+        <p>
+          The interface is now rendered through Edge templates and AdonisJS routes, while keeping the stark geometric
+          ink aesthetic of the original utility.
+        </p>
+      </article>
+    </section>
+  </div>
+@end

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# AdonisJS generated files
+.adonisjs/
+build/
+tmp/*
+!tmp/.gitkeep
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache
+coverage/
+
+# Frontend build artifacts
+public/assets/
+
+# Editor and OS files
+.DS_Store
+.fleet/
+.idea/
+.vscode/
