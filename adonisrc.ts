@@ -25,7 +25,6 @@ export default defineConfig({
   */
   commands: [
     () => import('@adonisjs/core/commands'),
-    () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
   ],
 
@@ -40,19 +39,15 @@ export default defineConfig({
   */
   providers: [
     () => import('@adonisjs/core/providers/app_provider'),
-    () => import('@adonisjs/core/providers/hash_provider'),
     {
       file: () => import('@adonisjs/core/providers/repl_provider'),
       environment: ['repl', 'test'],
     },
-    () => import('@adonisjs/core/providers/vinejs_provider'),
     () => import('@adonisjs/core/providers/edge_provider'),
     () => import('@adonisjs/session/session_provider'),
     () => import('@adonisjs/vite/vite_provider'),
     () => import('@adonisjs/shield/shield_provider'),
     () => import('@adonisjs/static/static_provider'),
-    () => import('@adonisjs/lucid/database_provider'),
-    () => import('@adonisjs/auth/auth_provider'),
   ],
 
   /*
@@ -66,7 +61,6 @@ export default defineConfig({
   preloads: [
     () => import('#start/routes'),
     () => import('#start/kernel'),
-    () => import('#start/validator'),
   ],
 
   /*
@@ -76,31 +70,6 @@ export default defineConfig({
   |
   | List of test suites to organize tests by their type. Feel free to remove
   | and add additional suites.
-  |
-  */
-  tests: {
-    suites: [
-      {
-        files: ['tests/unit/**/*.spec.ts'],
-        name: 'unit',
-        timeout: 2000,
-      },
-      {
-        files: ['tests/browser/**/*.spec.ts'],
-        name: 'browser',
-        timeout: 300000,
-      },
-    ],
-    forceExit: false,
-  },
-
-  /*
-  |--------------------------------------------------------------------------
-  | Meta files
-  |--------------------------------------------------------------------------
-  |
-  | A collection of files you want to copy to the build folder when creating
-  | a production build.
   |
   */
   metaFiles: [

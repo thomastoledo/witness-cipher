@@ -1,6 +1,6 @@
 # Witness Cipher
 
-Witness Cipher is a small AdonisJS app for encrypting and decrypting OpenSSL-compatible payloads.
+Witness Cipher is a small web app for encrypting and decrypting OpenSSL-compatible payloads.
 
 It accepts plain text plus a password, produces a base64 envelope, and can also decode either:
 
@@ -69,12 +69,6 @@ Run the crypto test suite:
 npm test
 ```
 
-Run Adonis tests:
-
-```bash
-npm run test:adonis
-```
-
 Run type checking:
 
 ```bash
@@ -114,7 +108,6 @@ test/opensslEnvelope.test.mjs
 
 ## Notes
 
-- The app is server-rendered through AdonisJS.
 - The decode flow understands `orbital-noise`-style JSON envelopes.
 - `meta` is displayed but not required for decryption.
 - The current app expects a Node version compatible with modern AdonisJS releases.
